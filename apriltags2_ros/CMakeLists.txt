@@ -11,6 +11,7 @@ find_package(catkin REQUIRED COMPONENTS
   message_generation
   cv_bridge
   tf
+  std_srvs
   cmake_modules
 )
 
