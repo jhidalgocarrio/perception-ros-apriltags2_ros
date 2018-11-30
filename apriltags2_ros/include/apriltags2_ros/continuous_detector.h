@@ -44,6 +44,7 @@
 #define APRILTAGS2_ROS_CONTINUOUS_DETECTOR_H
 
 #include "apriltags2_ros/common_functions.h"
+#include <std_srvs/Empty.h>
 
 namespace apriltags2_ros
 {
@@ -56,15 +57,21 @@ class ContinuousDetector
   void imageCallback(const sensor_msgs::ImageConstPtr& image_rect,
                      const sensor_msgs::CameraInfoConstPtr& camera_info);
 
+  bool serviceEnable(std_srvs::Empty::Request  &req, std_srvs::Empty::Response &res);
+  bool serviceDisable(std_srvs::Empty::Request  &req, std_srvs::Empty::Response &res);
+
  private:
   TagDetector tag_detector_;
   bool draw_tag_detections_image_;
+  bool enable_detection;
   cv_bridge::CvImagePtr cv_image_;
 
   image_transport::ImageTransport it_;
   image_transport::CameraSubscriber camera_image_subscriber_;
   image_transport::Publisher tag_detections_image_publisher_;
   ros::Publisher tag_detections_publisher_;
+  ros::ServiceServer enable, disable;
+
 };
 
 } // namespace apriltags2_ros
