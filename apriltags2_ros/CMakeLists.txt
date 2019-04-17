@@ -5,6 +5,7 @@ find_package(catkin REQUIRED COMPONENTS
   apriltags2
   geometry_msgs
   image_transport
+  image_geometry
   roscpp
   sensor_msgs
   std_msgs
@@ -13,6 +14,8 @@ find_package(catkin REQUIRED COMPONENTS
   tf
   std_srvs
   cmake_modules
+  nodelet
+  pluginlib
 )
 
 find_package(Eigen REQUIRED)
@@ -25,6 +28,8 @@ find_package(OpenCV REQUIRED)
 #  RelWithDebInfo : w/ debug symbols, w/ optimization
 #  MinSizeRel     : w/o debug symbols, w/ optimization, stripped binaries
 set(CMAKE_BUILD_TYPE Debug)
+
+set(CMAKE_CXX_STANDARD 11)
 
 add_definitions (-Wall -O3)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -funsafe-loop-optimizations -fsee -funroll-loops -fno-math-errno -funsafe-math-optimizations -ffinite-math-only -fno-signed-zeros ")
@@ -58,7 +63,7 @@ generate_messages(
 
 catkin_package(
   INCLUDE_DIRS include
-  CATKIN_DEPENDS apriltags2 geometry_msgs image_transport roscpp sensor_msgs std_msgs message_runtime cv_bridge tf
+  CATKIN_DEPENDS apriltags2 geometry_msgs image_transport roscpp sensor_msgs std_msgs message_runtime cv_bridge tf nodelet pluginlib
   DEPENDS Eigen OpenCV
 )
 
